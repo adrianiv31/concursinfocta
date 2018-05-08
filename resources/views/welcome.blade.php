@@ -14,13 +14,14 @@
                                 <h5>Etapa a II-a a concursului se va desfășura pe 19 mai 2018 începând cu ora 9.</h5>
                                 <h5>Proba durează 3 ore pentru gimnaziu.</h5>
                                 <h5>Elevii de liceu vor încărca proiectele începând de pe 18 mai 2018, ora 12:00, până pe 19 mai 2018, ora 12:00.</h5>
+                                    </span>
                                 <h4>Regulament privind organizarea şi desfăşurarea</h4>
 
                                 <h4>CONCURSULUI DE INFORMATICĂ</h4>
                                 <h4>CALCULATORUL JOC ȘI JOACĂ</h4>
 
                                 <h4>An şcolar 2017-2018</h4>
-                                    </span>
+
                             </span>
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">Argument</h5>
