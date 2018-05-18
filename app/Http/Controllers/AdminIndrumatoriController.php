@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use App\Grade;
 use App\Http\Requests\IndrumatorEditRequest;
 use App\Http\Requests\IndrumatorRequest;
@@ -203,11 +204,12 @@ class AdminIndrumatoriController extends Controller
             $scor = 0;
             foreach ($ras_date as $ras_dat) {
 
-echo $ras_dat->id." ".$ras_dat->raspuns->id."<br>";
-                //if ($ras_dat->raspuns->corect)
+                $ans = Answer::findOrFail($ras_dat->answer_id);
+                if ($ans->corect)
                     $scor += 5;
 
             }
+            echo $scor;
 exit;
 
             $test['scor']=$scor;

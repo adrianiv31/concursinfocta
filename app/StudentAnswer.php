@@ -34,7 +34,7 @@ class StudentAnswer extends Model
     public function raspuns()
     {
 
-        return $this->hasOne('App\Answer');
+        return $this->belongsTo('App\Answer');
 
     }
 }
