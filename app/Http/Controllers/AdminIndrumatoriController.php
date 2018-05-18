@@ -204,7 +204,7 @@ class AdminIndrumatoriController extends Controller
             foreach ($ras_date as $ras_dat) {
 
 
-                if ($ras_dat->answer->corect)
+                if ($ras_dat->raspuns->corect)
                     $scor += 5;
 
             }

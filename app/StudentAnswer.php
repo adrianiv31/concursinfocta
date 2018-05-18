@@ -31,7 +31,7 @@ class StudentAnswer extends Model
         return $this->belongsTo('App\Question');
 
     }
-    public function answer()
+    public function raspuns()
     {
 
         return $this->belongsTo('App\Answer');
