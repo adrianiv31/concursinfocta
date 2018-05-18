@@ -14,7 +14,7 @@
         <div class="panel-body">
 
             {!! Form::open(['method'=>'POST','action'=>'AdminStudentAnswerController@store','files'=>true]) !!}
-
+            {{ csrf_field() }}
 
             <input type="hidden" name="quiz_id" value="{{$quiz->id}}">
             <input type="hidden" name="question_id" value="{{$quest->id}}">
