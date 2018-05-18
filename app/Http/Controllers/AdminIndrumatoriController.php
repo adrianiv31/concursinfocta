@@ -203,7 +203,7 @@ class AdminIndrumatoriController extends Controller
             $scor = 0;
             foreach ($ras_date as $ras_dat) {
 
-echo $ras_dat->id;
+echo $ras_dat->id." ".$ras_dat->raspuns->id."<br>";
                 //if ($ras_dat->raspuns->corect)
                     $scor += 5;
 
