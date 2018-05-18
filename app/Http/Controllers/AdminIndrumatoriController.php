@@ -209,8 +209,6 @@ class AdminIndrumatoriController extends Controller
                     $scor += 5;
 
             }
-            echo $scor;
-exit;
 
             $test['scor']=$scor;
 
