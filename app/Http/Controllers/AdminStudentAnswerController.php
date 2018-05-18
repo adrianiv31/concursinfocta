@@ -66,15 +66,15 @@ class AdminStudentAnswerController extends Controller
                 if ($studentanswer) {
                     $pathE = $string . "/" . $studentanswer->answer;
 
-                    unlink('userprojects/'.$pathE);
+                    unlink('userprojects/' . $pathE);
 
-                    $file->move('userprojects/'.$string, $path);
+                    $file->move('userprojects/' . $string, $path);
                     $studentanswer->answer = $name;
                     $studentanswer->save();
 
                 } else {
                     Storage::makeDirectory($string);
-                    $file->move('userprojects/'.$string, $path);
+                    $file->move('userprojects/' . $string, $path);
 
                     $input = $request->all();
                     $input['answer'] = $name;
@@ -95,48 +95,106 @@ class AdminStudentAnswerController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function storeV(Request $request)
     {
         //
-    }
+        $files = $request->file('files');
+        $question_ids = $request->question_ids;
+        foreach ($question_ids as $question_id) {
+            $file = $files[$question_id];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            $name = time() . $file->getClientOriginalName();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            $user = Auth::user();
+
+            $studentanswer = StudentAnswer::where([
+                ['quiz_id', '=', $request->quiz_id],
+                ['user_id', '=', $user->id],
+                ['question_id', '=', $question_id],
+
+            ])->first();
+
+            $string = str_replace(' ', '', $user->email); // Replaces all spaces with hyphens.
+            $string = str_replace('-', '', $string); // Replaces all spaces with hyphens.
+            $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+
+            $path = $name;
+
+
+            if ($studentanswer) {
+                $pathE = $string . "/" . $studentanswer->answer;
+
+                unlink('userprojects/' . $pathE);
+
+                $file->move('userprojects/' . $string, $path);
+                $studentanswer->answer = $name;
+
+                $studentanswer->save();
+
+            } else {
+                Storage::makeDirectory($string);
+                $file->move('userprojects/' . $string, $path);
+
+                $input['quiz_id'] = $request->quiz_id;
+                $input['answer'] = $name;
+                $input['user_id'] = Auth::user()->id;
+                $input['question_id'] = $question_id;
+
+                StudentAnswer::create($input);
+
+            }
+        }
+            return redirect('/elev-test/');
+
+
+        }
+        /**
+         * Display the specified resource.
+         *
+         * @param  int $id
+         * @return \Illuminate\Http\Response
+         */
+        public
+        function show($id)
+        {
+            //
+        }
+
+        /**
+         * Show the form for editing the specified resource.
+         *
+         * @param  int $id
+         * @return \Illuminate\Http\Response
+         */
+        public
+        function edit($id)
+        {
+            //
+        }
+
+        /**
+         * Update the specified resource in storage.
+         *
+         * @param  \Illuminate\Http\Request $request
+         * @param  int $id
+         * @return \Illuminate\Http\Response
+         */
+        public
+        function update(Request $request, $id)
+        {
+            //
+        }
+
+        /**
+         * Remove the specified resource from storage.
+         *
+         * @param  int $id
+         * @return \Illuminate\Http\Response
+         */
+        public
+        function destroy($id)
+        {
+            //
+        }
     }
-}

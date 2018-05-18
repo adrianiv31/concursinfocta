@@ -311,6 +311,34 @@ Route::group(['middleware' => 'adminelev'], function () {
 
     });
 
+    Route::get('/incepe-test-proiectV/{id}', function ($id) {
+
+        $quiz = Quiz::findOrFail($id);
+        $questions = $quiz->questions;
+
+        $quest = null;
+//        foreach ($questions as $question) {
+//
+//
+//            $quest = $question;
+//
+//        }
+
+
+        $user = Auth::user();
+//        $studentanswer = StudentAnswer::where([
+//            ['quiz_id', '=', $quiz->id],
+//            ['user_id', '=', $user->id],
+//            ['question_id', '=', $question_id],
+//
+//        ])->get();
+
+
+
+        return view('admin.elevtest.testproiectV', compact('questions', 'quiz'));
+
+    });
+
     Route::get('/termina-test/{id}', function ($id) {
 
         $quiz = Quiz::findOrFail($id);
@@ -319,6 +347,8 @@ Route::group(['middleware' => 'adminelev'], function () {
         return redirect('/incepe-test/' . $quiz->id);
 
     });
+
+    Route::post('admin/elevtest/store/V', ['as' => 'admin.elevtest.storeV', 'uses' => 'AdminStudentAnswerController@storeV']);
     Route::resource('admin/elevtest', 'AdminStudentAnswerController');
 
 
