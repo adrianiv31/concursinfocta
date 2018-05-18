@@ -208,7 +208,7 @@ echo $ras_dat->id;
                     $scor += 5;
 
             }
-
+exit;
 
             $test['scor']=$scor;
 
