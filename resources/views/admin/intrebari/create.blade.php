@@ -32,8 +32,12 @@
                 {!! Form::file('file', ['class'=>'form-control','id'=>'i_file']) !!}
             </div>
             <div class="form-group">
+                {!! Form::label('type','Tip:') !!}
+                {!! Form::select('type', ['0'=>'Alegeți tipul','1' => 'Obiectiv','2' => 'Semiobiectiv', '3' => 'Subiectiv','5' => 'Cu fișier'],5, ['class'=>'form-control']) !!}
+            </div>
+            <div class="form-group" id="nr">
                 {!! Form::label('nr_raspunsuri','Numar de raspunsuri:') !!}
-                {!! Form::number('nr_raspunsuri', 4, ['class'=>'form-control']) !!}
+                {!! Form::number('nr_raspunsuri', 4, ['class'=>'form-control','id'=>'nrr']) !!}
             </div>
 
             <div class="form-group">
@@ -56,6 +60,7 @@
 @section('scripts')
 
     <script>
+        $('#nr').hide();
         $('#poza').hide();
         $('#i_file').change(function (event) {
             var tmppath = URL.createObjectURL(event.target.files[0]);
@@ -63,6 +68,20 @@
             $("#poza").fadeIn("fast").attr('src', URL.createObjectURL(event.target.files[0]));
 
             //$("#disp_tmp_path").html("Temporary Path(Copy it and try pasting it in browser address bar) --> <strong>["+tmppath+"]</strong>");
+        });
+
+        $('select[name=type]').on('change', function (e) {
+            var tip = e.target.value;
+            if(tip == 1) {
+                $('#nr').show();
+                $('#nrr').val("3");
+            }
+            // else if(tip == 2) $('#nrr').val("1");
+            // else {
+            //     $('#nrr').val("0");
+            //     $('#nri').show();
+            // }
+
         });
     </script>
 

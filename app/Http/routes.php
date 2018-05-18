@@ -78,7 +78,6 @@ Route::group(['middleware' => 'admin'], function () {
         Route::resource('admin/indrumatori', 'AdminIndrumatoriController');
 
 
-
     });
 
     Route::group(['middleware' => 'admineditor'], function () {
@@ -284,11 +283,39 @@ Route::group(['middleware' => 'adminelev'], function () {
         }
 
     });
+    Route::get('/incepe-test-proiect/{id}', function ($id) {
+
+        $quiz = Quiz::findOrFail($id);
+        $questions = $quiz->questions;
+
+        $quest = null;
+        foreach ($questions as $question) {
+
+
+            $quest = $question;
+
+        }
+
+
+        $user = Auth::user();
+//        $studentanswer = StudentAnswer::where([
+//            ['quiz_id', '=', $quiz->id],
+//            ['user_id', '=', $user->id],
+//            ['question_id', '=', $question_id],
+//
+//        ])->get();
+
+
+
+        return view('admin.elevtest.testproiect', compact('quest', 'quiz'));
+
+    });
+
     Route::get('/termina-test/{id}', function ($id) {
 
-       $quiz = Quiz::findOrFail($id);
-       // $activ = ['active' => '0'];
-       // $quiz->update($activ);
+        $quiz = Quiz::findOrFail($id);
+        // $activ = ['active' => '0'];
+        // $quiz->update($activ);
         return redirect('/incepe-test/' . $quiz->id);
 
     });

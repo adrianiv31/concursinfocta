@@ -25,7 +25,8 @@ class TestRequest extends Request
     {
         return [
             //
-            'answer_id'=>'required'
+            //'answer_id'=>'required'
+            'file' => 'required|mimes:zip,rar'
         ];
     }
 }

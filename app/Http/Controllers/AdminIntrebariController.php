@@ -47,28 +47,49 @@ class AdminIntrebariController extends Controller
     public function store(Request $request)
     {
         //
-        $nr_raspunsuri = $request->nr_raspunsuri;
         $input = $request->all();
 
 
-        if ($file = $request->file('file')) {
+        if($input['type'] == 5){
+            if ($file = $request->file('file')) {
 
-            $name = time() . $file->getClientOriginalName();
+                $name = time() . $file->getClientOriginalName();
 
 
-            $file->move('images', $name);
+                $file->move('images', $name);
 
-            $input['path'] = $name;
+                $input['path'] = $name;
 
-        } else {
-            $input['path'] = '';
+            } else {
+                $input['path'] = '';
+            }
+
+            $question = Question::create($input);
+            $request->session()->flash('intreb', 'Intrebarea a fost creata');
+            return redirect(route('admin.intrebari.create'));
         }
+        else {
+            $nr_raspunsuri = $request->nr_raspunsuri;
 
-        $question = Question::create($input);
+
+            if ($file = $request->file('file')) {
+
+                $name = time() . $file->getClientOriginalName();
+
+
+                $file->move('images', $name);
+
+                $input['path'] = $name;
+
+            } else {
+                $input['path'] = '';
+            }
+
+            $question = Question::create($input);
 
 //        $request->session()->flash('intreb', 'Intrebarea a fost creata');
-        return redirect(route('admin.raspunsuri.creare', [$question->id, $nr_raspunsuri]));
-
+            return redirect(route('admin.raspunsuri.creare', [$question->id, $nr_raspunsuri]));
+        }
 
     }
 

@@ -9,7 +9,7 @@ class Question extends Model
 //    trebuie adaugat camp pentru utilizatorul care a creat intrebarea
     public $directory = '/images/';
     //
-    protected $fillable = ['intrebare', 'grade_id', 'section_id', 'path'];
+    protected $fillable = ['intrebare', 'grade_id', 'section_id', 'path', 'type'];
 
     public function section()
     {
