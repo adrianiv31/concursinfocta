@@ -27,7 +27,7 @@ class User extends Authenticatable
 
     public function grade()
     {
-        return $this->hasOne('App\Grade');
+        return $this->belongsTo('App\Grade');
     }
 
     public function school()
@@ -60,6 +60,12 @@ class User extends Authenticatable
     public function prof(){
 
         return $this->belongsTo('App\User','user_id');
+
+    }
+
+    public function studentanswers(){
+
+        return $this->hasMany('App\StudentAnswer');
 
     }
 
@@ -129,6 +135,20 @@ class User extends Authenticatable
 
         foreach ($roles as $role)
             if($role->name == 'elev'){
+
+                return true;
+
+            }
+
+        return false;
+
+    }
+    public function isEvaluator(){
+
+        $roles = $this->roles;
+
+        foreach ($roles as $role)
+            if($role->name == 'profesor evaluator'){
 
                 return true;
 

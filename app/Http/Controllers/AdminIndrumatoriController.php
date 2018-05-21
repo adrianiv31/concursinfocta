@@ -202,12 +202,25 @@ class AdminIndrumatoriController extends Controller
             ])->get();
 
             $scor = 0;
-            foreach ($ras_date as $ras_dat) {
+            if($test->tip==5) {
+                foreach ($ras_date as $ras_dat) {
 
-                $ans = Answer::findOrFail($ras_dat->answer_id);
-                if ($ans->corect)
-                    $scor += 5;
 
+
+                        $scor += $ras_dat->points;
+
+                }
+            }
+            else {
+                foreach ($ras_date as $ras_dat) {
+
+
+                    $ans = Answer::findOrFail($ras_dat->answer_id);
+
+                    if ($ans->corect)
+                        $scor += 5;
+
+                }
             }
 
             $test['scor']=$scor;

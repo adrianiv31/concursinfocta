@@ -6,6 +6,8 @@ use App\Grade;
 use App\Question;
 use App\Quiz;
 use App\Section;
+use App\StudentAnswer;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -127,5 +129,27 @@ class AdminTesteController extends Controller
 
         $quiz->delete();
         return redirect(route('admin.teste.index'));
+    }
+
+    public function corecteaza($id){
+        $user = User::findOrFail($id);
+
+        $quiz = Quiz::where([
+            ['activeeval','=','1'],
+            ['grade_id','=',$user->grade_id],
+        ])->first();
+
+        $questions = $quiz->questions;
+
+        $studentanswers = $user->studentanswers->where('quiz_id',$quiz->id);
+//        foreach ($studentanswers as $studentanswer){
+//            echo $studentanswer->answer.'<br>';
+//        }
+
+        return view('admin.teste.corecteaza', compact('quiz', 'user', 'questions', 'studentanswers'));
+    }
+
+    public function storeScore(){
+        return redirect(url('/teste/evalueaza'));
     }
 }

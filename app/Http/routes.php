@@ -354,6 +354,58 @@ Route::group(['middleware' => 'adminelev'], function () {
 
 });
 
+Route::group(['middleware' => 'adminevaluator'], function () {
+
+    Route::get('/teste/evalueaza', function () {
+
+        $user = Auth::user();
+
+        $users = User::where([
+            ['grade_id', '=', $user->grade_id],
+        ])->get();
+
+        $grade = Grade::findorfail($user->grade_id);
+
+        return view('admin.teste.users', compact('users', 'grade'));
+
+    });
+    Route::get('/ajax-saveE2', function () {
+        $quiz_id = Input::get('quiz_id');
+        $question_id = Input::get('question_id');
+        $answer = Input::get('answer');
+        $user_id = Input::get('user_id');
+        // $active = Auth::user()->quizzes()->where('quiz_id', $quiz_id)->first()->pivot->active;
+
+
+        $studentanswer = StudentAnswer::where([
+            ['quiz_id', '=', $quiz_id],
+            ['user_id', '=', $user_id],
+            ['question_id', '=', $question_id],
+
+        ])->first();
+
+        $studentanswer->points = $answer;
+        $studentanswer->save();
+
+//            $input['user_id'] = Auth::user()->id;
+//            $input['quiz_id'] = $quiz_id;
+//            $input['question_id'] = $question_id;
+//            $input['answer_id'] = 0;
+//            $input['answer'] = $answer;
+//
+//            if (!$studentanswer)
+//                StudentAnswer::create($input);
+//            else {
+//                $studentanswer->answer = $answer;
+//                $studentanswer->save();
+//            }
+
+        return $answer;
+
+    });
+    Route::post('admin/teste/storeScore',  'AdminTesteController@storeScore')->name('admin.teste.storescore');
+    Route::get('admin/teste/corecteaza/{id}', 'AdminTesteController@corecteaza')->name('admin.teste.corecteaza');
+});
 /////////////////////////AJAX
 Route::get('/ajax-localitatis', function () {
 
