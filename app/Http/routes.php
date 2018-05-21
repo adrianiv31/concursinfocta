@@ -360,10 +360,16 @@ Route::group(['middleware' => 'adminevaluator'], function () {
 
         $user = Auth::user();
 
-        $users = User::where([
-            ['grade_id', '=', $user->grade_id],
-        ])->get();
-
+        if($user->grade_id == 1) {
+            $users = User::where([
+                ['grade_id', '=', $user->grade_id],
+            ])->get();
+        }
+        else{
+            $users = User::where([
+                ['grade_id', '<>', 1],
+            ])->get();
+        }
         $grade = Grade::findorfail($user->grade_id);
 
         return view('admin.teste.users', compact('users', 'grade'));

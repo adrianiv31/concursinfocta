@@ -56,9 +56,10 @@
 
 
                         ])->get();
-
+                        $nr_ras=0;
                         foreach ($studentanswers as $studentanswer) {
                             $score += $studentanswer->points;
+                            $nr_ras++;
                         }
                     }
 
@@ -86,7 +87,7 @@
 
                             foreach ($ras_date as $ras_dat) {
 
-
+                                echo $ras_dat->answer_id;
                                 $ans = App\Answer::findOrFail($ras_dat->answer_id);
                                  if($ans)
                                 if ($ans->corect)
@@ -107,9 +108,12 @@
                         <th scope="row">{{$score}}</th>
 
                         <th scope="row">
-                            <a href="{{route("admin.teste.corecteaza", $user->id)}}"
+                            @if($nr_ras>0)<a href="{{route("admin.teste.corecteaza", $user->id)}}"
                                            style="text-decoration: none">
                                 Corectează</a>
+                                @else
+                            Neprezentat
+                                @endif
                         </th>
 
 
