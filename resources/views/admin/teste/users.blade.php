@@ -87,7 +87,7 @@
 
                             foreach ($ras_date as $ras_dat) {
 
-                                echo $ras_dat->answer_id;
+
                                 $ans = App\Answer::findOrFail($ras_dat->answer_id);
                                  if($ans)
                                 if ($ans->corect)
