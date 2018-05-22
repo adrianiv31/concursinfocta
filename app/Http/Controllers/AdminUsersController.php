@@ -221,4 +221,9 @@ class AdminUsersController extends Controller
         $user->delete();
         return redirect(route('admin.users.index'));
     }
+
+    public function rezultate(){
+        $sections = Section::lists('name', 'id')->all();
+        return view('admin.users.rezultate', compact('sections'));
+    }
 }

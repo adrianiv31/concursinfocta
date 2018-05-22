@@ -61,75 +61,155 @@ Route::group(['middleware' => 'admin'], function () {
 
             }
 
+
         });
-
-
-        Route::resource('admin/teste', 'AdminTesteController');
-        Route::get('admin/teste/creareintrebari/{id}', ['as' => 'admin.teste.creareintrebari', 'uses' => 'AdminTesteController@storeintrebari']);
-
-
-    });
-
-    Route::group(['middleware' => 'adminindrumator'], function () {
-
-
-        Route::get('admin/indrumatori/rezultate/{id}', ['uses' => 'AdminIndrumatoriController@rezultate', 'as' => 'admin.intrumatori.rezultate']);
-
-        Route::resource('admin/indrumatori', 'AdminIndrumatoriController');
-
-
-    });
-
-    Route::group(['middleware' => 'admineditor'], function () {
-
-        Route::get('admin/intrebari/detaliu', 'AdminIntrebariController@detaliu')->name('admin.intrebari.detaliu');
-        Route::resource('admin/intrebari', 'AdminIntrebariController');
-
-        Route::resource('admin/raspunsuri', 'AdminRaspunsuriController', ['except' => ['create']]);
-        Route::get('admin/raspunsuri/creare/{id}/{nr_raspunsuri}', ['as' => 'admin.raspunsuri.creare', 'uses' => 'AdminRaspunsuriController@create']);
-
-        Route::get('/ajax-detaliu', function () {
+        Route::get('/ajax-rezultate', function () {
 
             $section_id = Input::get('section_id');
             $grade_id = Input::get('grade_id');
-            $intrebari = Question::where([
 
+            $users = User::where([
                 ['section_id', '=', $section_id],
                 ['grade_id', '=', $grade_id],
             ])->get();
-            $html = '';
-            $i = 1;
-            foreach ($intrebari as $intrebare) {
-                $html .= '<div class="panel panel-default">
-  <div class="panel-heading"><h3>' . $i . '. ' . htmlspecialchars($intrebare->intrebare) . '</h3>';
-                if ($intrebare->getOriginal('path'))
-                    $html .= '<br> <img src="' . htmlspecialchars($intrebare->path) . '" alt="Responsive image" class="img-fluid">';
+            $rezults = null;
+            foreach ($users as $user) {
+                if ($user->isElev()) {
 
-                $html .= '</div>
-  <div class="panel-body">';
 
-                $raspunsuri = $intrebare->answers;
-                $html .= '<ol style="list-style-type: lower-alpha; font-size:20px">';
-                foreach ($raspunsuri as $raspuns) {
-                    if ($raspuns->corect)
-                        $html .= '<li style="margin: 30px;color:#ff0000;">';
-                    else
-                        $html .= '<li style="margin: 30px;">';
-                    if ($raspuns->raspuns)
-                        $html .= htmlspecialchars($raspuns->raspuns);
-                    if ($raspuns->getOriginal('path'))
-                        $html .= ' <img src="' . htmlspecialchars($raspuns->path) . '" alt="Responsive image" class="img-fluid">';
+                    $score = 0;
+                    $quiz = App\Quiz::where([
+                        ['activeeval', '=', '1'],
+                        ['grade_id', '=', $user->grade_id],
+                    ])->first();
+                    if ($quiz) {
 
-                    $html .= '</li>';
+
+                        $studentanswers = App\StudentAnswer::where([
+                            ['quiz_id', '=', $quiz->id],
+                            ['user_id', '=', $user->id],
+
+
+                        ])->get();
+                        $nr_ras = 0;
+                        foreach ($studentanswers as $studentanswer) {
+                            $score += $studentanswer->points;
+                            $nr_ras++;
+                        }
+                    }
+
+
+                    //////////
+                    $teste = App\Quiz::where([
+
+                            ['section_id', '=', $user->section_id],
+                            ['grade_id', '=', $user->grade_id],
+                            ['activeeval', '=', 0],
+                        ]
+                    )->get();
+
+
+                    foreach ($teste as $test) {
+
+                        $ras_date = App\StudentAnswer::where([
+                            ['quiz_id', '=', $test->id],
+                            ['user_id', '=', $user->id],
+
+
+                        ])->get();
+
+                        $scoreI = 0;
+
+                        foreach ($ras_date as $ras_dat) {
+
+
+                            $ans = App\Answer::findOrFail($ras_dat->answer_id);
+                            if ($ans)
+                                if ($ans->corect)
+                                    $scoreI += 5;
+
+                        }
+
+                    }
+                    $total = $score+$scoreI;
+                    $rezults[$user->id] = array('nume' => $user->name, 'scoala' => $user->school->name, 'indrumator' => $user->prof->name, 'scorI' => $scoreI, 'scorII' => $score, 'total'=>$total);
                 }
-                $html .= '</ol>';
-
-                $html .= '</div>
-</div>';
-                $i++;
+            }
+            function sortByOrder($a, $b) {
+                return $a['total'] - $b['total'];
             }
 
-            return $html;
+            usort($rezults, 'sortByOrder');
+            return Response::json($rezults);
+
+        });
+
+    Route::resource('admin/teste', 'AdminTesteController');
+    Route::get('admin/teste/creareintrebari/{id}', ['as' => 'admin.teste.creareintrebari', 'uses' => 'AdminTesteController@storeintrebari']);
+    Route::get('admin/rezultate', 'AdminUsersController@rezultate')->name('admin.users.rezultate');
+
+});
+
+Route::group(['middleware' => 'adminindrumator'], function () {
+
+
+    Route::get('admin/indrumatori/rezultate/{id}', ['uses' => 'AdminIndrumatoriController@rezultate', 'as' => 'admin.intrumatori.rezultate']);
+
+    Route::resource('admin/indrumatori', 'AdminIndrumatoriController');
+
+
+});
+
+Route::group(['middleware' => 'admineditor'], function () {
+
+    Route::get('admin/intrebari/detaliu', 'AdminIntrebariController@detaliu')->name('admin.intrebari.detaliu');
+    Route::resource('admin/intrebari', 'AdminIntrebariController');
+
+    Route::resource('admin/raspunsuri', 'AdminRaspunsuriController', ['except' => ['create']]);
+    Route::get('admin/raspunsuri/creare/{id}/{nr_raspunsuri}', ['as' => 'admin.raspunsuri.creare', 'uses' => 'AdminRaspunsuriController@create']);
+
+    Route::get('/ajax-detaliu', function () {
+
+        $section_id = Input::get('section_id');
+        $grade_id = Input::get('grade_id');
+        $intrebari = Question::where([
+
+            ['section_id', '=', $section_id],
+            ['grade_id', '=', $grade_id],
+        ])->get();
+        $html = '';
+        $i = 1;
+        foreach ($intrebari as $intrebare) {
+            $html .= '<div class="panel panel-default">
+  <div class="panel-heading"><h3>' . $i . '. ' . htmlspecialchars($intrebare->intrebare) . '</h3>';
+            if ($intrebare->getOriginal('path'))
+                $html .= '<br> <img src="' . htmlspecialchars($intrebare->path) . '" alt="Responsive image" class="img-fluid">';
+
+            $html .= '</div>
+  <div class="panel-body">';
+
+            $raspunsuri = $intrebare->answers;
+            $html .= '<ol style="list-style-type: lower-alpha; font-size:20px">';
+            foreach ($raspunsuri as $raspuns) {
+                if ($raspuns->corect)
+                    $html .= '<li style="margin: 30px;color:#ff0000;">';
+                else
+                    $html .= '<li style="margin: 30px;">';
+                if ($raspuns->raspuns)
+                    $html .= htmlspecialchars($raspuns->raspuns);
+                if ($raspuns->getOriginal('path'))
+                    $html .= ' <img src="' . htmlspecialchars($raspuns->path) . '" alt="Responsive image" class="img-fluid">';
+
+                $html .= '</li>';
+            }
+            $html .= '</ol>';
+
+            $html .= '</div>
+</div>';
+            $i++;
+        }
+
+        return $html;
 //            $section = Section::where('id', '=', $section_id)->take(1)->get();
 //
 //
@@ -138,42 +218,42 @@ Route::group(['middleware' => 'admin'], function () {
 //
 //            return Response::json($grades);
 
-        });
     });
+});
 
 
-    /////////AJAX
-    Route::get('/ajax-localitatis', function () {
+/////////AJAX
+Route::get('/ajax-localitatis', function () {
 
-        $judete_id = Input::get('judete_id');
+    $judete_id = Input::get('judete_id');
 
-        $localitatis = Localitati::where('judete_id', '=', $judete_id)->orderBy('nume')->get();
+    $localitatis = Localitati::where('judete_id', '=', $judete_id)->orderBy('nume')->get();
 
-        return Response::json($localitatis);
+    return Response::json($localitatis);
 
-    });
+});
 
-    Route::get('/ajax-grades', function () {
+Route::get('/ajax-grades', function () {
 
-        $section_id = Input::get('section_id');
+    $section_id = Input::get('section_id');
 
-        $section = Section::where('id', '=', $section_id)->take(1)->get();
+    $section = Section::where('id', '=', $section_id)->take(1)->get();
 
 
-        if ($section[0]->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->get();
-        else $grades = Grade::where('name', 'like', '%X%')->get();
+    if ($section[0]->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->get();
+    else $grades = Grade::where('name', 'like', '%X%')->get();
 
-        return Response::json($grades);
+    return Response::json($grades);
 
-    });
+});
 
-    Route::get('/ajax-prof', function () {
+Route::get('/ajax-prof', function () {
 
-        $school_id = Input::get('school_id');
+    $school_id = Input::get('school_id');
 
-        $profesori = User::whereHas('roles', function ($query) {
-            $query->where('name', 'administrator')->orWhere('name', 'profesor îndrumător');
-        })->where('school_id', '=', $school_id)->get();
+    $profesori = User::whereHas('roles', function ($query) {
+        $query->where('name', 'administrator')->orWhere('name', 'profesor îndrumător');
+    })->where('school_id', '=', $school_id)->get();
 
 //        $profesori = User::where([
 //            ['school_id', '=', $school_id],
@@ -181,18 +261,18 @@ Route::group(['middleware' => 'admin'], function () {
 //
 //        ])->orderBy('name')->get();
 
-        return Response::json($profesori);
+    return Response::json($profesori);
 
-    });
+});
 
-    Route::get('/ajax-sections', function () {
+Route::get('/ajax-sections', function () {
 
 
-        $sectiuni = Section::all();
+    $sectiuni = Section::all();
 
-        return Response::json($sectiuni);
+    return Response::json($sectiuni);
 
-    });
+});
 
 
 });
@@ -306,7 +386,6 @@ Route::group(['middleware' => 'adminelev'], function () {
 //        ])->get();
 
 
-
         return view('admin.elevtest.testproiect', compact('quest', 'quiz'));
 
     });
@@ -334,7 +413,6 @@ Route::group(['middleware' => 'adminelev'], function () {
 //        ])->get();
 
 
-
         return view('admin.elevtest.testproiectV', compact('questions', 'quiz'));
 
     });
@@ -360,12 +438,11 @@ Route::group(['middleware' => 'adminevaluator'], function () {
 
         $user = Auth::user();
 
-        if($user->grade_id == 1) {
+        if ($user->grade_id == 1) {
             $users = User::where([
                 ['grade_id', '=', $user->grade_id],
             ])->get();
-        }
-        else{
+        } else {
             $users = User::where([
                 ['grade_id', '<>', 1],
             ])->get();
@@ -409,7 +486,7 @@ Route::group(['middleware' => 'adminevaluator'], function () {
         return $answer;
 
     });
-    Route::post('admin/teste/storeScore',  'AdminTesteController@storeScore')->name('admin.teste.storescore');
+    Route::post('admin/teste/storeScore', 'AdminTesteController@storeScore')->name('admin.teste.storescore');
     Route::get('admin/teste/corecteaza/{id}', 'AdminTesteController@corecteaza')->name('admin.teste.corecteaza');
 });
 /////////////////////////AJAX

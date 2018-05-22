@@ -126,6 +126,10 @@
                                 <li>
                                     <a href="{{route('admin.users.create')}}">Creare Utilizator</a>
                                 </li>
+
+                                <li>
+                                    <a href="{{route('admin.users.rezultate')}}">Rezultate concurs</a>
+                                </li>
                             @elseif(Auth::user()->isIndrumator())
                                 <li>
                                     <a href="{{route('admin.indrumatori.index')}}">Toti Elevii</a>
