@@ -136,7 +136,7 @@ Route::group(['middleware' => 'admin'], function () {
                 }
             }
             function sortByOrder($a, $b) {
-                return $a['total'] - $b['total'];
+                return -($a['total'] - $b['total']);
             }
 
             usort($rezults, 'sortByOrder');
