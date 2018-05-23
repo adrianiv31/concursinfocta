@@ -16,7 +16,10 @@
         {!! Form::select('grade_id',['0'=>'Mai întâi alegeți secțiunea'], null, ['class'=>'form-control']) !!}
     </div>
 
-
+    <div class="form-group" id="rez">
+        {!! Form::label('rezultateHTML','Rezultate sub forma de tabel Html:') !!}
+        {!! Form::textarea('rezultateHTML') !!}
+    </div>
 
 
     {!! Form::close() !!}
@@ -69,13 +72,15 @@
                 $.get('/ajax-rezultate?section_id=' + section_id+'&grade_id=' +grade_id, function (data) {
 
                     $('.rezultate').empty();
-
+                    $str='<table><thead><tr><td>Nume</td><td>Școala</td><td>Profesor Indrumător</td><td>Rezultat proba I</td><td>Rezultat proba II</td><td>Punctaj Total</td></tr></thead><tbody>';
                     $.each(data, function (index, locObj) {
 
-                        $('.rezultate').append(locObj.nume + ' ' + locObj.scorI + '<br>');
+                       $str+='<tr><td>'+locObj.nume + '</td><td>' + locObj.scoala+ '</td><td>' + locObj.indrumator+ '</td><td>' + locObj.scorI+ '</td><td>' + locObj.scorII+ '</td><td>' + locObj.total + '</td></tr>';
 
                     });
-
+                    $str += '</tbody></table>';
+                    $('.rezultate').append($str);
+                    $('textarea[name=rezultateHTML]').val($str);
                 });
             }
 
