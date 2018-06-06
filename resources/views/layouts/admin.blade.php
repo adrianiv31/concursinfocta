@@ -130,13 +130,19 @@
                                 <li>
                                     <a href="{{route('admin.users.rezultate')}}">Rezultate concurs</a>
                                 </li>
+                                <li>
+                                    <a href="{{route('admin.users.rezultate.indrumator',Auth::user()->id)}}">Rezultate concurs indrumator</a>
+                                </li>
                             @elseif(Auth::user()->isIndrumator())
                                 <li>
                                     <a href="{{route('admin.indrumatori.index')}}">Toti Elevii</a>
                                 </li>
 
+                                {{--<li>--}}
+                                    {{--<a href="{{route('admin.indrumatori.create')}}">Creare Elev</a>--}}
+                                {{--</li>--}}
                                 <li>
-                                    <a href="{{route('admin.indrumatori.create')}}">Creare Elev</a>
+                                    <a href="{{route('admin.users.rezultate.indrumator',Auth::user()->id)}}">Rezultate concurs</a>
                                 </li>
                             @endif
 

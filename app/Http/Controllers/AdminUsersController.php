@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use App\Grade;
 use App\Http\Requests\UserEditRequest;
 use App\Http\Requests\UserRequest;
 use App\Judete;
+use App\Quiz;
 use App\Role;
 use App\School;
 use App\Section;
+use App\StudentAnswer;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -225,5 +228,89 @@ class AdminUsersController extends Controller
     public function rezultate(){
         $sections = Section::lists('name', 'id')->all();
         return view('admin.users.rezultate', compact('sections'));
+    }
+
+
+    public function rezultateIndrumator($id){
+//        $sections = Section::lists('name', 'id')->all();
+//        return view('admin.users.rezultateIndrumator', compact('sections'));
+
+//        $section_id = Input::get('section_id');
+//        $grade_id = Input::get('grade_id');
+
+        $users = User::where([
+            ['user_id', '=', $id],
+//            ['grade_id', '=', $grade_id],
+        ])->get();
+        $rezults = null;
+        foreach ($users as $user) {
+            if ($user->isElev()) {
+
+
+                $score = 0;
+                $quiz = Quiz::where([
+                    ['activeeval', '=', '1'],
+                    ['grade_id', '=', $user->grade_id],
+                ])->first();
+                if ($quiz) {
+
+
+                    $studentanswers = StudentAnswer::where([
+                        ['quiz_id', '=', $quiz->id],
+                        ['user_id', '=', $user->id],
+
+
+                    ])->get();
+                    $nr_ras = 0;
+                    foreach ($studentanswers as $studentanswer) {
+                        $score += $studentanswer->points;
+                        $nr_ras++;
+                    }
+                }
+
+
+                //////////
+                $teste = Quiz::where([
+
+                        ['section_id', '=', $user->section_id],
+                        ['grade_id', '=', $user->grade_id],
+                        ['activeeval', '=', 0],
+                    ]
+                )->get();
+
+
+                foreach ($teste as $test) {
+
+                    $ras_date = StudentAnswer::where([
+                        ['quiz_id', '=', $test->id],
+                        ['user_id', '=', $user->id],
+
+
+                    ])->get();
+
+                    $scoreI = 0;
+
+                    foreach ($ras_date as $ras_dat) {
+
+
+                        $ans = Answer::findOrFail($ras_dat->answer_id);
+                        if ($ans)
+                            if ($ans->corect)
+                                $scoreI += 5;
+
+                    }
+
+                }
+                $total = $score+$scoreI;
+                $rezults[$user->id] = array('nume' => $user->name, 'scoala' => $user->school->name, 'indrumator' => $user->prof->name, 'scorI' => $scoreI, 'scorII' => $score, 'total'=>$total);
+            }
+        }
+
+        if($rezults)
+        usort($rezults, function ($a, $b) {
+            return -($a['total'] - $b['total']);
+        });
+        return view('admin.users.rezultateIndrumator', compact('rezults'));
+        //return Response::json($rezults);
     }
 }
