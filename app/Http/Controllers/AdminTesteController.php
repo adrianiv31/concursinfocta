@@ -101,8 +101,17 @@ class AdminTesteController extends Controller
     public function edit($id)
     {
         //
-    }
+        $quiz = Quiz::findOrFail($id);
 
+
+        $questions = $quiz->questions;
+
+
+
+
+            return view('admin.teste.edit', compact('questions', 'quiz'));
+
+    }
     /**
      * Update the specified resource in storage.
      *

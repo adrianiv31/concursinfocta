@@ -295,7 +295,7 @@ Route::group(['middleware' => 'adminelev'], function () {
             ])->get();
 
         } else if ($user->isAdmin()) {
-            $quiz = Quiz::where('active', '=', '1')->get();
+            $quiz = Quiz::where('active', '=', '0')->get();
         }
 
         return view('admin.elevtest.index', compact('user', 'quiz'));
