@@ -8,6 +8,7 @@ use App\Quiz;
 use App\Section;
 use App\StudentAnswer;
 use App\User;
+use PDF;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -34,8 +35,8 @@ class AdminTesteController extends Controller
     public function create()
     {
         //
-        $sections = Section::lists('name', 'id')->all();
-        $grades = Grade::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
+        $grades = Grade::pluck('name', 'id')->all();
 
         return view('admin.teste.create', compact('sections', 'grades'));
     }
@@ -160,5 +161,23 @@ class AdminTesteController extends Controller
 
     public function storeScore(){
         return redirect(url('/teste/evalueaza'));
+    }
+
+    public function downloadPDF($id){
+//        $user = UserDetail::find($id);
+//
+//        $pdf = PDF::loadView('pdf', compact('user'));
+//        return $pdf->download('invoice.pdf');
+
+        $quiz = Quiz::findOrFail($id);
+
+
+        $questions = $quiz->questions;
+
+        $pdf = PDF::loadView('admin.teste.pdf', compact('questions','quiz'));
+
+
+        return $pdf->download($quiz->section->name.'-'.$quiz->grade->name.'.pdf');
+
     }
 }

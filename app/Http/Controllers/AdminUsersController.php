@@ -44,14 +44,14 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-        $roles = Role::where('id', '!=', 2)->lists('name', 'id')->all();
+        $roles = Role::where('id', '!=', 2)->pluck('name', 'id')->all();
 
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
-        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
+        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->pluck('nume', 'id')->all();
 
-        $schools = School::lists('name', 'id')->all();
+        $schools = School::pluck('name', 'id')->all();
 
-        $sections = Section::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
 
         return view('admin.users.create', compact('roles', 'localitatis', 'schools', 'sections'));
     }
@@ -117,31 +117,31 @@ class AdminUsersController extends Controller
         //
         $user = User::findOrFail($id);
 
-        $roles = Role::where('id', '!=', 2)->lists('name', 'id')->all();
+        $roles = Role::where('id', '!=', 2)->pluck('name', 'id')->all();
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
-        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
+        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->pluck('nume', 'id')->all();
 
 
         $role_id = Role::where('name', '=', 'profesor îndrumător')->take(1)->get();
-        $schools = School::lists('name', 'id')->all();
+        $schools = School::pluck('name', 'id')->all();
 
         $profesori = User::where([
 
                 ['school_id', '=', $user->school_id],
                 ['role_id', '=', $role_id[0]->id],
             ]
-        )->lists('name', 'id')->all();
+        )->pluck('name', 'id')->all();
 
 //        echo $user->school_id;
 //        foreach($profesori as $prof)echo $prof."<br>";exit;
 
-        $sections = Section::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
 
         if (!is_null($user->section)) {
-            if ($user->section->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->lists('name', 'id')->all();
-            else $grades = Grade::where('name', 'like', '%X%')->lists('name', 'id')->all();
+            if ($user->section->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->pluck('name', 'id')->all();
+            else $grades = Grade::where('name', 'like', '%X%')->pluck('name', 'id')->all();
         } else {
-            $grades = Grade::lists('name', 'id')->all();
+            $grades = Grade::pluck('name', 'id')->all();
         }
         return view('admin.users.edit', compact('user', 'roles', 'localitatis', 'schools', 'sections', 'profesori', 'grades'));
     }
@@ -226,13 +226,13 @@ class AdminUsersController extends Controller
     }
 
     public function rezultate(){
-        $sections = Section::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
         return view('admin.users.rezultate', compact('sections'));
     }
 
 
     public function rezultateIndrumator($id){
-//        $sections = Section::lists('name', 'id')->all();
+//        $sections = Section::pluck('name', 'id')->all();
 //        return view('admin.users.rezultateIndrumator', compact('sections'));
 
 //        $section_id = Input::get('section_id');

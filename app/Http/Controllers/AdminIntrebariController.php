@@ -114,8 +114,8 @@ class AdminIntrebariController extends Controller
     {
         //
         $question = Question::findOrFail($id);
-        $sections = Section::lists('name', 'id')->all();
-        $grades = Grade::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
+        $grades = Grade::pluck('name', 'id')->all();
         $answers = $question->answers;
         return view('admin.intrebari.edit', compact('question', 'sections', 'grades', 'answers'));
     }
@@ -197,8 +197,8 @@ class AdminIntrebariController extends Controller
 
     public function detaliu()
     {
-        $sections = Section::lists('name','id')->all();
-        $grades = Grade::lists('name','id')->all();
+        $sections = Section::pluck('name','id')->all();
+        $grades = Grade::pluck('name','id')->all();
 
         return view('admin.intrebari.detaliu',compact('sections','grades'));
     }

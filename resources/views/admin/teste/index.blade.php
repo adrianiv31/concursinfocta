@@ -29,16 +29,19 @@
                     <td>{{$test->question_number}}</td>
                     <td>{{$test->time}}</td>
                     <td>{{$test->active}}</td>
-                    <td><a href="{{route("admin.teste.edit", $test->id)}}"
-                           style="text-decoration: none">
-                            <img src="/img/edit.png" height="25"></a>
-                    </td>
-                    <td></td>
-                    <td>
-                        {!! Form::open(['method'=>'DELETE','action'=>['AdminTesteController@destroy',$test->id], 'onsubmit' => 'return ConfirmDialog("Sigur vreți să eliminați intrebarea?")']) !!}
+                    {{--<td><a href="{{route("admin.teste.edit", $test->id)}}"--}}
+                           {{--style="text-decoration: none">--}}
+                            {{--<img src="/img/edit.png" height="25"></a>--}}
+                    {{--</td>--}}
+                    <td><a href="{{action('AdminTesteController@downloadPDF', $test->id)}}">PDF</a>
+                        <a href="{{route("admin.teste.edit", $test->id)}}" style="text-decoration: none"><img src="/img/edit.png" height="25"></a>
+                </td>
+                <td></td>
+                <td>
+                    {!! Form::open(['method'=>'DELETE','action'=>['AdminTesteController@destroy',$test->id], 'onsubmit' => 'return ConfirmDialog("Sigur vreți să eliminați intrebarea?")']) !!}
 
-                        <div class="form-group">
-                            {{--{!! Form::submit('', ['style'=>'background: url("/img/delete.png") no-repeat scroll 0 0 transparent;color: #000000;cursor: pointer;font-weight: bold;height: 20px;padding-bottom: 2px;width: 75px;']) !!}--}}
+                    <div class="form-group">
+                        {{--{!! Form::submit('', ['style'=>'background: url("/img/delete.png") no-repeat scroll 0 0 transparent;color: #000000;cursor: pointer;font-weight: bold;height: 20px;padding-bottom: 2px;width: 75px;']) !!}--}}
                             {{--<input type="image" src="/img/delete.png" height="20" alt="Submit" />--}}
                             {!! Form::image('img/delete.png','success', array( 'height' => 25 ))  !!}
                         </div>
