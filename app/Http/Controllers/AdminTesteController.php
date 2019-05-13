@@ -70,6 +70,15 @@ class AdminTesteController extends Controller
 
         return redirect(route('admin.teste.index'));
     }
+    public function updateintrebari(Request $request, $id)
+    {
+        $test = Quiz::findOrFail($id);
+        $selectate =  $request->selectate;
+
+        $test->questions()->sync($selectate);
+
+        return redirect(route('admin.teste.index'));
+    }
 
     /**
      * Display the specified resource.
@@ -92,6 +101,21 @@ class AdminTesteController extends Controller
         return view('admin.teste.showcreate', compact('test','intrebari'));
 
     }
+    public function editquestions($id)
+    {
+        //
+        $test = Quiz::findOrFail($id);
+
+        $intrebari = Question::where([
+
+                ['section_id', '=', $test->section_id],
+                ['grade_id', '=', $test->grade_id],
+            ]
+        )->get();
+
+        return view('admin.teste.editquestions', compact('test','intrebari'));
+
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -104,13 +128,14 @@ class AdminTesteController extends Controller
         //
         $quiz = Quiz::findOrFail($id);
 
-
+        $sections = Section::pluck('name', 'id')->all();
+        $grades = Grade::pluck('name', 'id')->all();
         $questions = $quiz->questions;
 
 
 
 
-            return view('admin.teste.edit', compact('questions', 'quiz'));
+            return view('admin.teste.edit', compact('questions', 'quiz', 'sections', 'grades'));
 
     }
     /**
@@ -123,6 +148,20 @@ class AdminTesteController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $input = $request->all();
+
+        $test = Quiz::findOrfail($id);
+
+        if($request->has('active')) {
+            $input['active']=1;
+        }
+        else{
+            $input['active']=0;
+        }
+        $test->update($input);
+
+        return redirect(route("admin.teste.editquestions", $test->id));
+
     }
 
     /**

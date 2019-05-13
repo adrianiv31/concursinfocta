@@ -32,8 +32,8 @@ class AdminIntrebariController extends Controller
     public function create()
     {
         //
-        $sections = Section::lists('name', 'id')->all();
-        $grades = Grade::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
+        $grades = Grade::pluck('name', 'id')->all();
         return view('admin.intrebari.create', compact('sections', 'grades'));
 
     }

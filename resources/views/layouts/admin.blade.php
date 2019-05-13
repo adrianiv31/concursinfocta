@@ -139,9 +139,9 @@
                                     <a href="{{route('admin.indrumatori.index')}}">Toti Elevii</a>
                                 </li>
 
-                                {{--<li>--}}
-                                    {{--<a href="{{route('admin.indrumatori.create')}}">Creare Elev</a>--}}
-                                {{--</li>--}}
+                                <li>
+                                    <a href="{{route('admin.indrumatori.create')}}">Creare Elev</a>
+                                </li>
                                 <li>
                                     <a href="{{route('admin.users.rezultate.indrumator',Auth::user()->id)}}">Rezultate concurs</a>
                                 </li>

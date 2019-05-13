@@ -10,17 +10,13 @@
                     <div class="panel-body">
                         @if (Auth::guest())
                             <span style="text-align: center;">
-                                <span style="color: red">
-                                <h5>Etapa a II-a a concursului se va desfășura pe 19 mai 2018 începând cu ora 9.</h5>
-                                <h5>Proba durează 3 ore pentru gimnaziu.</h5>
-                                <h5>Elevii de liceu vor încărca proiectele începând de pe 18 mai 2018, ora 12:00, până pe 19 mai 2018, ora 12:00.</h5>
-                                    </span>
+
                                 <h4>Regulament privind organizarea şi desfăşurarea</h4>
 
                                 <h4>CONCURSULUI DE INFORMATICĂ</h4>
                                 <h4>CALCULATORUL JOC ȘI JOACĂ</h4>
 
-                                <h4>An şcolar 2017-2018</h4>
+                                <h4>An şcolar 2018-2019</h4>
 
                             </span>
                             <p style="text-align: justify">
@@ -73,13 +69,11 @@
                             </p>
                             <p>Concursul se desfășoară pe platformă online și se organizează pe următoarele secţiuni:
                             <ol>
-                                <li>Gimnaziu, clasa a V-a, structurat în două probe obligatorii: T.I.C. și Programare;</li>
-                                <li>Liceu–filiera teoretică și vocațională structurat în două probe obligatorii: T.I.C.
-                                    și Realizarea unei prezentări/pagini web pe o temă dată;
+                                <li>Gimnaziu, care constă într-o probă practică de Programare;</li>
+                                <li>Liceu–toate filierele și toate profilurile, care constă în realizarea unui proiect
+                                    pe o temă dată.
                                 </li>
-                                <li>Învățământ profesional și tehnic structurat în două probe obligatorii: T.I.C. și
-                                    Realizarea unei prezentări/pagini web pe o temă dată.
-                                </li>
+
                             </ol>
                             </p>
 
@@ -93,39 +87,42 @@
                             </p>
                             <p>
                                 În urma înscrierii, fiecare participant va primi un user și o parolă cu care se va loga
-                                pe platformă în zilele de concurs în intervalul orar 10.00-12.00.
+                                pe platformă.
+
+                            </p>
+                            <p>
+                                La secțiunea gimnaziu elevii se vor putea loga în zilele de concurs în intervalul orar
+                                10.00-12.00.
                             </p>
 
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">4. Desfășurarea concursului</h5>
                             </p>
-                            <p>La toate secțiunile prima probă constă într-un test grilă și realizarea unui desen pe o
-                                temă precizată în ziua concursului.
+                            <p>La secțiunea <span style="font-weight: bold">Gimnaziu</span> proba practică constă în
+                                rezolvarea a două probleme de natură algoritmică folosind aplicația Scratch.
                             </p>
                             <p>
-                                Proba a doua la secțiunea <span style="font-weight: bold">Gimnaziu</span> constă în
-                                rezolvarea a trei probleme de natură algoritmică folosind aplicația Scratch.
+                                Proba se va desfășura în unitatea de învățământ la o dată stabilită conform calendarului
+                                concursului cu durata de 2 ore.
                             </p>
                             <p>
-                                La secțiunile <span
-                                        style="font-weight: bold">Liceu–filiera teoretică și vocațională</span> și <span
-                                        style="font-weight: bold">Învățământ profesional și tehnic</span> proba a doua
-                                constă în realizarea unei Prezentări multimedia/Pagini web pe tema <span
-                                        style="font-weight: bold">De la copilărie la adolescență-meseria visată</span>.
+                                La secțiunea <span style="font-weight: bold">Liceu</span> proba constă în realizarea
+                                unui proiect cu tema <span style="font-weight: bold">Promovarea concursului Calculatorul Joc și Joacă</span>.
+                                Proiectul va fi trimis conform calendarului concursului.
+
                             </p>
-                            <p>Probele se vor desfășura conform calendarului anexă la prezentul regulament.
-                            </p>
+
 
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">5. Evaluarea</h5>
                             </p>
-                            <p>Fiecare probă va fi evaluată cu câte 100 de puncte. La proba de T.I.C. testul grilă este
-                                format din 20 itemi evaluați cu câte 5 puncte.
-                            </p>
+
                             <p>
-                                La cea de a doua probă de la secțiunea Gimnaziu, fiecare problemă va fi evaluată cu câte
-                                30 de puncte, acordându-se 10 puncte din oficiu. La celelalte două secțiuni evaluarea se
-                                va face în funcție de următoarele criterii:
+                                La secțiunea Gimnaziu, fiecare problemă va fi evaluată cu câte 45 de puncte,
+                                acordându-se 10 puncte din oficiu. La secțiunea <span
+                                        style="font-weight: bold">Liceu</span> evaluarea se va face în funcție de
+                                următoarele criterii:
+
                             <table>
                                 <tr>
                                     <td>Creativitate și simț artistic</td>
@@ -149,32 +146,57 @@
                                 </tr>
                             </table>
                             </p>
-                            <p>
-                                La finalul concursului punctajele obținute la cele două probe de către fiecare
-                                participant se vor aduna, iar rezultatul va reprezenta punctajul final al concurentului.
-                            </p>
+
 
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">6. Premierea</h5>
                             </p>
-                            <p>Premierea se realizează pe fiecare clasă de la fiecare secțiune, în ordinea descrescătoare a punctajelor
-                                finale obținute de participanți.
+                            <p>Premierea se realizează pe fiecare secțiune în ordinea descrescătoare a punctajelor
+                                obținute de participanți.
                             </p>
 
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">7. Programa</h5>
                             </p>
-                            <p>Programa pentru testul grilă include Elemente de arhitectură a unui sistem de calcul,
-                                Tipuri de dispozitive: de intrare, de ieșire, de intrare-ieșire, de stocare a datelor,
-                                Sisteme de operare și Internet.
-                            </p>
-
+                            <p>La secțiunea <span style="font-weight: bold">Gimnaziu</span>, rezolvările se vor realiza
+                                în Scratch, iar programa este următoarea:</p>
+                            <ul>
+                                <li>clasa a V-a – Structura liniară și structura alternativă</li>
+                                <li>clasa VI-a – Structura liniară, structura alternativă și structuri repetitive</li>
+                            </ul>
+                            <p>La secțiunea <span style="font-weight: bold">Liceu</span>, proiectele se vor încadra în
+                                următoarea structură:</p>
+                            <ul>
+                                <li>clasa a IX-a – realizarea unei sigle și a unui afiș sau realizarea unei sigle și a
+                                    unui pliant;
+                                </li>
+                                <li>clasa a X-a – realizarea unei prezentări multimedia și a unei diplome;</li>
+                                <li>clasa a XI-a și a XII- a – realizarea unui site.</li>
+                            </ul>
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">8. Dispoziții finale</h5>
                             </p>
                             <p>Pe site-ul concursului, pentru fiecare secţiune, vor fi afişate: clasamentul și lista
                                 premianţilor.
                             </p>
+
+                            <p style="text-align: justify">
+                            <h5 style="font-weight: bold">9. Calendar</h5>
+                            </p>
+                            <ul>
+                                <li>15 – 25 aprilie 2019 – selectarea elevilor participanți la nivelul fiecărei unități
+                                    de învățământ
+                                </li>
+                                <li>06 – 10 mai 2019 – înscrierea pe platforma online și depunerea cererilor de
+                                    înscriere la Inspectoratul Școlar Județean Constanța
+                                </li>
+                                <li>11 – 14 mai 2019 – validarea înscrierilor pe platforma online</li>
+                                <li>17 – 18 mai 2019 – transmiterea proiectelor la secțiunea Liceu</li>
+                                <li>18 mai 2019, între orele 10.00 – 12.00 – proba de concurs pentru secțiunea
+                                    Gimnaziu
+                                </li>
+                                <li>27 mai 2019 – afișarea rezultatelor</li>
+                            </ul>
 
 
 
@@ -183,12 +205,14 @@
 
                             Sunteți autentificat ca {{ Auth::user()->name }}!
                             <span style="text-align: center;">
+
                                 <h4>Regulament privind organizarea şi desfăşurarea</h4>
 
                                 <h4>CONCURSULUI DE INFORMATICĂ</h4>
                                 <h4>CALCULATORUL JOC ȘI JOACĂ</h4>
 
-                                <h4>An şcolar 2017-2018</h4>
+                                <h4>An şcolar 2018-2019</h4>
+
                             </span>
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">Argument</h5>
@@ -240,13 +264,11 @@
                             </p>
                             <p>Concursul se desfășoară pe platformă online și se organizează pe următoarele secţiuni:
                             <ol>
-                                <li>Gimnaziu, clasa a V-a, structurat în două probe obligatorii: T.I.C. și Programare;</li>
-                                <li>Liceu–filiera teoretică și vocațională structurat în două probe obligatorii: T.I.C.
-                                    și Realizarea unei prezentări/pagini web pe o temă dată;
+                                <li>Gimnaziu, care constă într-o probă practică de Programare;</li>
+                                <li>Liceu–toate filierele și toate profilurile, care constă în realizarea unui proiect
+                                    pe o temă dată.
                                 </li>
-                                <li>Învățământ profesional și tehnic structurat în două probe obligatorii: T.I.C. și
-                                    Realizarea unei prezentări/pagini web pe o temă dată.
-                                </li>
+
                             </ol>
                             </p>
 
@@ -260,39 +282,42 @@
                             </p>
                             <p>
                                 În urma înscrierii, fiecare participant va primi un user și o parolă cu care se va loga
-                                pe platformă în zilele de concurs în intervalul orar 10.00-12.00.
+                                pe platformă.
+
+                            </p>
+                            <p>
+                                La secțiunea gimnaziu elevii se vor putea loga în zilele de concurs în intervalul orar
+                                10.00-12.00.
                             </p>
 
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">4. Desfășurarea concursului</h5>
                             </p>
-                            <p>La toate secțiunile prima probă constă într-un test grilă și realizarea unui desen pe o
-                                temă precizată în ziua concursului.
+                            <p>La secțiunea <span style="font-weight: bold">Gimnaziu</span> proba practică constă în
+                                rezolvarea a două probleme de natură algoritmică folosind aplicația Scratch.
                             </p>
                             <p>
-                                Proba a doua la secțiunea <span style="font-weight: bold">Gimnaziu</span> constă în
-                                rezolvarea a trei probleme de natură algoritmică folosind aplicația Scratch.
+                                Proba se va desfășura în unitatea de învățământ la o dată stabilită conform calendarului
+                                concursului cu durata de 2 ore.
                             </p>
                             <p>
-                                La secțiunile <span
-                                        style="font-weight: bold">Liceu–filiera teoretică și vocațională</span> și <span
-                                        style="font-weight: bold">Învățământ profesional și tehnic</span> proba a doua
-                                constă în realizarea unei Prezentări multimedia/Pagini web pe tema <span
-                                        style="font-weight: bold">De la copilărie la adolescență-meseria visată</span>.
+                                La secțiunea <span style="font-weight: bold">Liceu</span> proba constă în realizarea
+                                unui proiect cu tema <span style="font-weight: bold">Promovarea concursului Calculatorul Joc și Joacă</span>.
+                                Proiectul va fi trimis conform calendarului concursului.
+
                             </p>
-                            <p>Probele se vor desfășura conform calendarului anexă la prezentul regulament.
-                            </p>
+
 
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">5. Evaluarea</h5>
                             </p>
-                            <p>Fiecare probă va fi evaluată cu câte 100 de puncte. La proba de T.I.C. testul grilă este
-                                format din 20 itemi evaluați cu câte 5 puncte.
-                            </p>
+
                             <p>
-                                La cea de a doua probă de la secțiunea Gimnaziu, fiecare problemă va fi evaluată cu câte
-                                30 de puncte, acordându-se 10 puncte din oficiu. La celelalte două secțiuni evaluarea se
-                                va face în funcție de următoarele criterii:
+                                La secțiunea Gimnaziu, fiecare problemă va fi evaluată cu câte 45 de puncte,
+                                acordându-se 10 puncte din oficiu. La secțiunea <span
+                                        style="font-weight: bold">Liceu</span> evaluarea se va face în funcție de
+                                următoarele criterii:
+
                             <table>
                                 <tr>
                                     <td>Creativitate și simț artistic</td>
@@ -316,32 +341,57 @@
                                 </tr>
                             </table>
                             </p>
-                            <p>
-                                La finalul concursului punctajele obținute la cele două probe de către fiecare
-                                participant se vor aduna, iar rezultatul va reprezenta punctajul final al concurentului.
-                            </p>
+
 
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">6. Premierea</h5>
                             </p>
-                            <p>Premierea se realizează pe fiecare clasă de la fiecare secțiune, în ordinea descrescătoare a punctajelor
-                                finale obținute de participanți.
+                            <p>Premierea se realizează pe fiecare secțiune în ordinea descrescătoare a punctajelor
+                                obținute de participanți.
                             </p>
 
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">7. Programa</h5>
                             </p>
-                            <p>Programa pentru testul grilă include Elemente de arhitectură a unui sistem de calcul,
-                                Tipuri de dispozitive: de intrare, de ieșire, de intrare-ieșire, de stocare a datelor,
-                                Sisteme de operare și Internet.
-                            </p>
-
+                            <p>La secțiunea <span style="font-weight: bold">Gimnaziu</span>, rezolvările se vor realiza
+                                în Scratch, iar programa este următoarea:</p>
+                            <ul>
+                                <li>clasa a V-a – Structura liniară și structura alternativă</li>
+                                <li>clasa VI-a – Structura liniară, structura alternativă și structuri repetitive</li>
+                            </ul>
+                            <p>La secțiunea <span style="font-weight: bold">Liceu</span>, proiectele se vor încadra în
+                                următoarea structură:</p>
+                            <ul>
+                                <li>clasa a IX-a – realizarea unei sigle și a unui afiș sau realizarea unei sigle și a
+                                    unui pliant;
+                                </li>
+                                <li>clasa a X-a – realizarea unei prezentări multimedia și a unei diplome;</li>
+                                <li>clasa a XI-a și a XII- a – realizarea unui site.</li>
+                            </ul>
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">8. Dispoziții finale</h5>
                             </p>
                             <p>Pe site-ul concursului, pentru fiecare secţiune, vor fi afişate: clasamentul și lista
                                 premianţilor.
                             </p>
+
+                            <p style="text-align: justify">
+                            <h5 style="font-weight: bold">9. Calendar</h5>
+                            </p>
+                            <ul>
+                                <li>15 – 25 aprilie 2019 – selectarea elevilor participanți la nivelul fiecărei unități
+                                    de învățământ
+                                </li>
+                                <li>06 – 10 mai 2019 – înscrierea pe platforma online și depunerea cererilor de
+                                    înscriere la Inspectoratul Școlar Județean Constanța
+                                </li>
+                                <li>11 – 14 mai 2019 – validarea înscrierilor pe platforma online</li>
+                                <li>17 – 18 mai 2019 – transmiterea proiectelor la secțiunea Liceu</li>
+                                <li>18 mai 2019, între orele 10.00 – 12.00 – proba de concurs pentru secțiunea
+                                    Gimnaziu
+                                </li>
+                                <li>27 mai 2019 – afișarea rezultatelor</li>
+                            </ul>
                         @endif
                     </div>
                 </div>

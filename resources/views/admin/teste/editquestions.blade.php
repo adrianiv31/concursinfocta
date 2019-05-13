@@ -6,13 +6,13 @@
     <div class="row">
         <div class="col-sm-12">
 
-            <h1>Adaugare intrebari pentru {{$test->name}}</h1>
+            <h1>Editare intrebari pentru {{$test->name}}</h1>
             @if (Session::has('intreb'))
                 <div class="alert alert-info">{{ Session::get('test') }}</div>
             @endif
 
 
-            {!! Form::open(['method'=>'GET','action'=>['AdminTesteController@storeintrebari',$test->id]]) !!}
+            {!! Form::open(['method'=>'GET','action'=>['AdminTesteController@updateintrebari',$test->id]]) !!}
 
             <table class="table table-striped">
                 <thead>
@@ -36,7 +36,7 @@
                     @foreach($intrebari as $intrebare)
                         <tr>
                             <th scope="row">{{$intrebare->id}} - {{$i+1}}</th>
-                            <td>{{$intrebare->intrebare}}</td>
+                            <td>{!! $intrebare->intrebare !!}</td>
                             <td> @if($intrebare->getOriginal('path'))
                                     <img src="{{$intrebare->path}}" alt="Responsive image" class="img-fluid"
                                          height="50">
@@ -46,8 +46,11 @@
                             </td>
                             <td>
                                 <div class="form-group">
-
-                                    {!! Form::checkbox('selectate[]', $intrebare->id, false,['class'=>'intreb']) !!}
+                                    @if($test->questions->contains($intrebare))
+                                    {!! Form::checkbox('selectate[]', $intrebare->id, true,['class'=>'intreb']) !!}
+                                        @else
+                                        {!! Form::checkbox('selectate[]', $intrebare->id, false,['class'=>'intreb']) !!}
+                                        @endif
                                 </div>
                             </td>
 

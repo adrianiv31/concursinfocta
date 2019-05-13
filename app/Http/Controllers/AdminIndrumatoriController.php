@@ -123,7 +123,7 @@ class AdminIndrumatoriController extends Controller
         $sections = Section::pluck('name', 'id')->all();
 
         if (!is_null($user->section)) {
-            if ($user->section->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->pluck('name', 'id')->all();
+            if ($user->section->name == 'Gimnaziu') $grades = Grade::where('name', 'like', '%V%')->pluck('name', 'id')->all();
             else $grades = Grade::where('name', 'like', '%X%')->pluck('name', 'id')->all();
         } else {
             $grades = Grade::pluck('name','id')->all();

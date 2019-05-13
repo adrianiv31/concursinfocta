@@ -21,7 +21,7 @@
             @foreach($intrebari as $intrebare)
                 <tr>
                     <th scope="row">{{$intrebare->id}}</th>
-                    <td>{{$intrebare->intrebare}}</td>
+                    <td>{!! $intrebare->intrebare !!}</td>
                     <td>{{$intrebare->section->name}}</td>
                     <td>{{$intrebare->grade->name}}</td>
                     <td>{{($intrebare->getOriginal('path'))?'Da':'Nu'}}</t>

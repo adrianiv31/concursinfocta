@@ -1,104 +1,59 @@
-@extends('layouts.test')
+@extends('layouts.admin')
 
 
 @section('content')
 
 
-    {{--<div id="timer"></div>--}}
-    @foreach($questions as $quest)
-    <div class="panel panel-default">
-        <div class="panel-heading"><h2>{{htmlspecialchars($quest->intrebare)}}</h2>
-            @if ($quest->getOriginal('path'))
-                <br> <img src="{{htmlspecialchars($quest->path)}}" alt="Responsive image" class="img-fluid">;
+    <div class="row">
+        <div class="col-sm-12">
+
+            <h1>Editare Test</h1>
+            @if (Session::has('intreb'))
+                <div class="alert alert-info">{{ Session::get('test') }}</div>
             @endif
-        </div>
-        <div class="panel-body">
 
-            {!! Form::open(['method'=>'POST','action'=>'AdminStudentAnswerController@store']) !!}
 
-            <input type="hidden" name="quiz_id" value="{{$quiz->id}}">
-            <input type="hidden" name="question_id" value="{{$quest->id}}">
+            {!! Form::model($quiz,['method'=>'PATCH','action'=>['AdminTesteController@update',$quiz->id]]) !!}
+            <div class="form-group">
+                {!! Form::label('name','Test:') !!}
+                {!! Form::text('name', null, ['class'=>'form-control']) !!}
+            </div>
 
-            @foreach($quest->answers as $answer)
-                <div class="form-group" style="background-color: #eeeeee;margin:10px;padding: 10px;">
+            <div class="form-group">
+                {!! Form::label('section_id','Sectiunea:') !!}
+                {!! Form::select('section_id', [''=>'Alegeți secțiunea']+$sections,null, ['class'=>'form-control']) !!}
+            </div>
 
-                    <h3>{{ Form::radio('answer_id',$answer->id) }}</h3>
-                    @if($answer->raspuns){{$answer->raspuns}}
-                    @endif
-                    @if ($answer->getOriginal('path'))
-                        <img src="{{htmlspecialchars($answer->path)}}" alt="Responsive image" class="img-fluid">;
-                    @endif
-                </div>
+            <div class="form-group">
+                {!! Form::label('grade_id','Clasa:') !!}
+                {!! Form::select('grade_id',[''=>'Alegeți clasa']+$grades, null, ['class'=>'form-control']) !!}
+            </div>
 
-            @endforeach
-            {{--<div class="form-group">--}}
-                {{--{!! Form::submit('Raspunde si treci la urmatoarea intrebare', ['class'=>'btn btn-primary','id'=>'but']) !!}--}}
-            {{--</div>--}}
+            <div class="form-group">
+                {!! Form::label('time','Timp(min):') !!}
+                {!! Form::number('time', 120, ['class'=>'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('active','Activ:') !!}
+                {!! Form::checkbox('active', null,null, ['class'=>'form-control']) !!}
+            </div>
+            {{--Alegere intrebari--}}
+
+
+
+            {{--terminare alegere intrebari--}}
+
+            <div class="form-group">
+                {!! Form::submit('Modifică Test', ['class'=>'btn btn-primary']) !!}
+            </div>
 
             {!! Form::close() !!}
 
-            {{--@if(count($errors)>0)--}}
-                {{--<div class="alert alert-danger">--}}
 
-                    {{--<ul>--}}
-                        {{--@foreach($errors->all() as $error)--}}
-                            {{--<li>{{$error}}</li>--}}
-                        {{--@endforeach--}}
-
-                    {{--</ul>--}}
-
-
-                {{--</div>--}}
-
-            {{--@endif--}}
-
+            @include('admin.includes.form_errors')
         </div>
+
+
     </div>
-    @endforeach
-
-@endsection
-@section('scripts')
-    {{--<script>--}}
-        {{--$('#but').hide();--}}
-
-        {{--$('input[name=answer_id]').on('change', function (e) {--}}
-            {{--$('input:radio:checked').each(function() {--}}
-                {{--$('#but').show(100);--}}
-            {{--});--}}
-        {{--});--}}
-
-        {{--// Set the date we're counting down to--}}
-        {{--var countDownDate = new Date("Jan 20, 2018 12:00:00").getTime();--}}
-
-        {{--// Update the count down every 1 second--}}
-        {{--var x = setInterval(function() {--}}
-
-            {{--// Get todays date and time--}}
-            {{--var now = new Date().getTime();--}}
-
-            {{--// Find the distance between now an the count down date--}}
-            {{--var distance = countDownDate - now;--}}
-
-            {{--// Time calculations for days, hours, minutes and seconds--}}
-            {{--var days = Math.floor(distance / (1000 * 60 * 60 * 24));--}}
-            {{--var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));--}}
-            {{--var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));--}}
-            {{--var seconds = Math.floor((distance % (1000 * 60)) / 1000);--}}
-
-            {{--// Display the result in the element with id="demo"--}}
-            {{--if(minutes<11)--}}
-                {{--document.getElementById("timer").innerHTML = "<h5 style='color:red'>Timp ramas: " + hours + "h "--}}
-                    {{--+ minutes + "m " + seconds + "s </h5>";--}}
-            {{--else--}}
-                {{--document.getElementById("timer").innerHTML = "<h5>Timp ramas: " + hours + "h "--}}
-                    {{--+ minutes + "m " + seconds + "s </h5>";--}}
-            {{--// If the count down is finished, write some text--}}
-            {{--if (distance < 0) {--}}
-                {{--clearInterval(x);--}}
-                {{--window.location.replace('/elev-test');--}}
-                {{--//document.getElementById("timer").innerHTML = "EXpired";--}}
-            {{--}--}}
-        {{--}, 1000);--}}
-
-    {{--</script>--}}
 @endsection

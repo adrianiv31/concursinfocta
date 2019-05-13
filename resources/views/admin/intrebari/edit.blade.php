@@ -53,7 +53,7 @@
     <div class="row">
 
         <p>
-            {{$question->intrebare}}
+            {!! $question->intrebare !!}
         </p>
         <p>
             @if($question->getOriginal('path'))

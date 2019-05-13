@@ -11,6 +11,15 @@
 |
 */
 
+use App\Grade;
+use App\Localitati;
+use App\Question;
+use App\Quiz;
+use App\Section;
+use App\User;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -146,11 +155,16 @@ Route::group(['middleware' => 'admin'], function () {
             'create' => 'admin.teste.create',
             'store' => 'admin.teste.store',
             'edit' => 'admin.teste.edit',
+            'show' => 'admin.teste.show',
+
+
 
 
         ]]);
         Route::get('/downloadPDF/{id}','AdminTesteController@downloadPDF');
         Route::get('admin/teste/creareintrebari/{id}', ['as' => 'admin.teste.creareintrebari', 'uses' => 'AdminTesteController@storeintrebari']);
+        Route::get('admin/teste/updateintrebari/{id}', ['as' => 'admin.teste.updateintrebari', 'uses' => 'AdminTesteController@updateintrebari']);
+        Route::get('admin/teste/editquestions/{id}', ['as' => 'admin.teste.editquestions', 'uses' => 'AdminTesteController@editquestions']);
         Route::get('admin/rezultate', 'AdminUsersController@rezultate')->name('admin.users.rezultate');
 
     });
@@ -210,7 +224,7 @@ Route::group(['middleware' => 'admin'], function () {
             $i = 1;
             foreach ($intrebari as $intrebare) {
                 $html .= '<div class="panel panel-default">
-  <div class="panel-heading"><h3>' . $i . '. ' . htmlspecialchars($intrebare->intrebare) . '</h3>';
+  <div class="panel-heading"><h3>' . $i . '.</h3> ' . $intrebare->intrebare;
                 if ($intrebare->getOriginal('path'))
                     $html .= '<br> <img src="' . htmlspecialchars($intrebare->path) . '" alt="Responsive image" class="img-fluid">';
 
@@ -323,7 +337,7 @@ Route::group(['middleware' => 'adminelev'], function () {
             ])->get();
 
         } else if ($user->isAdmin()) {
-            $quiz = Quiz::where('active', '=', '0')->get();
+            $quiz = Quiz::all();
         }
 
         return view('admin.elevtest.index', compact('user', 'quiz'));
@@ -544,7 +558,7 @@ Route::get('/ajax-grades', function () {
     $section = Section::where('id', '=', $section_id)->take(1)->get();
 
 
-    if ($section[0]->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->get();
+    if ($section[0]->name == 'Gimnaziu') $grades = Grade::where('name', 'like', '%V%')->get();
     else $grades = Grade::where('name', 'like', '%X%')->get();
 
     return Response::json($grades);

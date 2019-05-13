@@ -3,6 +3,7 @@
 
 
 @section('content')
+    @include('admin.includes.tinyeditor')
     <div class="row">
         <div class="col-sm-6">
 
@@ -15,7 +16,7 @@
             {!! Form::open(['method'=>'POST','action'=>'AdminIntrebariController@store','files'=>true]) !!}
             <div class="form-group">
                 {!! Form::label('intrebare','Intrebare:') !!}
-                {!! Form::text('intrebare', null, ['class'=>'form-control']) !!}
+                {!! Form::textarea('intrebare', null, ['class'=>'form-control']) !!}
             </div>
 
             <div class="form-group">
