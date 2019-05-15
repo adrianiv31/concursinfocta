@@ -19,12 +19,15 @@
 
 
 
-                {{--*/$i = 1/*--}}
-                {{--*/$pct2 = 0/*--}}
+                @php
+                    $i = 1;
+                    $pct2 = 0;
+                @endphp
+
                 @foreach($questions as $question)
                     @if($question->type == 5)
                         <div class="well well-sm">
-                            <h4 class="text-primary">{{$i}}. {{$question->intrebare}}
+                            <h4 class="text-primary">{{$i}}. {!! $question->intrebare !!}
                                 <input type="hidden"
                                        name="s2[]"
                                        value="{{$question->id}}"/>
@@ -59,7 +62,9 @@
                             }else echo '<span class="text-warning">Nu a răspuns</span>';
                             ?>
                         </div>
-                        {{--*/$i++/*--}}
+                        @php
+                            $i++;
+                        @endphp
                     @endif
                 @endforeach
                 <div class="well well-sm">

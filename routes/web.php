@@ -16,6 +16,7 @@ use App\Localitati;
 use App\Question;
 use App\Quiz;
 use App\Section;
+use App\StudentAnswer;
 use App\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -506,18 +507,22 @@ Route::group(['middleware' => 'adminevaluator'], function () {
 
     Route::get('/teste/evalueaza', function () {
 
+
         $user = Auth::user();
 
-        if ($user->grade_id == 1) {
+        if ($user->grade_id == 1 || $user->grade_id == 2) {
             $users = User::where([
                 ['grade_id', '=', $user->grade_id],
             ])->get();
         } else {
+
             $users = User::where([
                 ['grade_id', '<>', 1],
+                ['grade_id', '<>', 2],
             ])->get();
         }
         $grade = Grade::findorfail($user->grade_id);
+
 
         return view('admin.teste.users', compact('users', 'grade'));
 

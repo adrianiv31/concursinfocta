@@ -15,8 +15,8 @@
             <th scope="col">Clasa</th>
             <th scope="col">Unitate de invatamant</th>
             <th scope="col">Profesor indrumator</th>
-            <th scope="col">Punctaj Proba I</th>
-            <th scope="col">Punctaj Proba II</th>
+
+            <th scope="col">Punctaj Proba</th>
             <th scope="col">Corectează</th>
 
         </tr>
@@ -27,7 +27,7 @@
             @foreach($users as $user)
                 @if($user->isElev())
                     <?php
-
+                    $nr_ras=0;
                             $score=0;
                     //  $quiz = $user->quizzes()->first();
 
@@ -45,6 +45,7 @@
                         ['activeeval','=','1'],
                         ['grade_id','=',$user->grade_id],
                     ])->first();
+                    $activeval = 0;
                     if ($quiz) {
 
                         //        foreach ($questions as $question){
@@ -61,6 +62,7 @@
                             $score += $studentanswer->points;
                             $nr_ras++;
                         }
+                        $activeval=1;
                     }
 
 
@@ -74,29 +76,29 @@
                     )->get();
 
 
-                    foreach($teste as $test){
-
-                        $ras_date = App\StudentAnswer::where([
-                            ['quiz_id', '=', $test->id],
-                            ['user_id', '=', $user->id],
-
-
-                        ])->get();
-
-                        $scoreI = 0;
-
-                            foreach ($ras_date as $ras_dat) {
-
-
-                                $ans = App\Answer::findOrFail($ras_dat->answer_id);
-                                 if($ans)
-                                if ($ans->corect)
-                                    $scoreI += 5;
-
-                            }
-
-                        }
-//                    ?>
+//                    foreach($teste as $test){
+//
+//                        $ras_date = App\StudentAnswer::where([
+//                            ['quiz_id', '=', $test->id],
+//                            ['user_id', '=', $user->id],
+//
+//
+//                        ])->get();
+//
+//                        $scoreI = 0;
+//
+//                            foreach ($ras_date as $ras_dat) {
+//
+//
+//                                $ans = App\Answer::findOrFail($ras_dat->answer_id);
+//                                 if($ans)
+//                                if ($ans->corect)
+//                                    $scoreI += 5;
+//
+//                            }
+//
+//                        }
+                    ?>
                     <tr>
                         <th scope="row">{{$user->id}}</th>
                         <th scope="row">{{$user->name}}</th>
@@ -104,15 +106,17 @@
                         <th scope="row">{{$user->grade->name}}</th>
                         <th scope="row">{{(!empty($user->school))?$user->school->name:""}}</th>
                         <th scope="row">{{(!empty($user->prof))?$user->prof->name:""}}</th>
-                        <th scope="col">{{$scoreI}}</th>
+                        {{--<th scope="col">{{$scoreI}}</th>--}}
                         <th scope="row">{{$score}}</th>
 
                         <th scope="row">
-                            @if($nr_ras>0)<a href="{{route("admin.teste.corecteaza", $user->id)}}"
+                            @if($nr_ras>0)<a href="{{route('admin.teste.corecteaza', $user->id)}}"
                                            style="text-decoration: none">
                                 Corectează</a>
-                                @else
+                                @elseif($activeval != 0)
                             Neprezentat
+                                @else
+                                Niciun test activ pentru corectat
                                 @endif
                         </th>
 
