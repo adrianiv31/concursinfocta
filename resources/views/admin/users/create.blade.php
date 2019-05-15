@@ -156,7 +156,7 @@
 
         $('select[name=section_id]').on('change', function (e) {
             //console.log(e);
-            alert("dsa");
+
             var section_id = e.target.value;
 
             $.get('/ajax-grades?section_id=' + section_id, function (data) {

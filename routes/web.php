@@ -316,6 +316,25 @@ Route::group(['middleware' => 'admin'], function () {
         return Response::json($sectiuni);
 
     });
+    Route::get('/ajax-test-check', function () {
+
+        $id = Input::get('id');
+
+        $quiz = Quiz::findOrFail($id);
+
+        if($quiz->active==0) {
+            $input['active']=1;
+        }
+        else{
+            $input['active']=0;
+        }
+        $quiz->update($input);
+
+
+
+        return $input['active'];
+
+    });
 
 
 });

@@ -11,6 +11,7 @@
             <th scope="col">#</th>
             <th scope="col">Nume</th>
             <th scope="col">Email</th>
+            <th scope="col">Clasa</th>
             <th scope="col">Judet/Localitate</th>
             <th scope="col">Unitate de invatamant</th>
             <th scope="col">Profesor indrumator</th>
@@ -25,6 +26,7 @@
                     <th scope="row">{{$user->id}}</th>
                     <th scope="row">{{$user->name}}</th>
                     <th scope="row">{{$user->email}}</th>
+                    <th scope="row">{{(!empty($user->grade->name))?$user->grade->name:""}}</th>
                     <th scope="row">{{$user->judete->nume}}/{{$user->localitati->nume}}</th>
                     <th scope="row">{{(!empty($user->school))?$user->school->name:""}}</th>
                     <th scope="row">{{(!empty($user->prof))?$user->prof->name:""}}</th>

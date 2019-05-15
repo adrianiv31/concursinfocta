@@ -6,7 +6,7 @@
 
 
     <div class="panel panel-default">
-        <div class="panel-heading"><h2>{{htmlspecialchars($quest->intrebare)}}</h2>
+        <div class="panel-heading"><h2>{!! $quest->intrebare !!}</h2>
             @if ($quest->getOriginal('path'))
                 <br> <img src="{{htmlspecialchars($quest->path)}}" alt="Responsive image" class="img-fluid">;
             @endif
