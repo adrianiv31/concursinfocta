@@ -30,9 +30,10 @@ class AdminUsersController extends Controller
         //
         //$users = User::all()->sortBy(['role_id','name']);
 
-        $users = User::all()->sortBy(function ($item) {
-            return $item->role_id . '-' . $item->name;
-        });
+//        $users = User::all()->sortBy(function ($item) {
+//            return $item->role_id . '-' . $item->name;
+//        });
+        $users = User::orderBy('school_id')->orderBy('grade_id')->orderBy('name')->get();
         return view('admin.users.index', compact('users'));
     }
 

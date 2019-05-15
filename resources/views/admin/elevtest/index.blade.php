@@ -31,7 +31,7 @@
                     <th scope="row">{{$test->id}}</th>
                     <td>{{$test->name}}</td>
                     <td>
-                        @if($test->grade_id == 1)
+                        @if($test->grade_id == 1 || $test->grade_id == 2)
                             <a href="/incepe-test-proiectV/{{$test->id}}">Incepe testul</a>
                         @else
                             <a href="/incepe-test-proiect/{{$test->id}}">Incepe testul</a>
