@@ -18,7 +18,7 @@
 
             <input type="hidden" name="quiz_id" value="{{$quiz->id}}">
             <input type="hidden" name="question_id" value="{{$quest->id}}">
-
+            <h4>Fișier încărcat: <a href="{{$pathE}}">{{$ans}}</a> </h4>
             <div class="form-group">
                 {!! Form::label('file','Fișierul:') !!}
                 {!! Form::file('file', ['class'=>'form-control','id'=>'i_file']) !!}

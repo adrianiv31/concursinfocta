@@ -48,7 +48,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::group(['middleware' => 'adminadmin'], function () {
 
 
-        Route::resource('admin/users', 'AdminUsersController',['names'=>[
+        Route::resource('admin/users', 'AdminUsersController', ['names' => [
 
             'index' => 'admin.users.index',
             'create' => 'admin.users.create',
@@ -137,11 +137,12 @@ Route::group(['middleware' => 'admin'], function () {
                         }
 
                     }
-                    $total = $score+$scoreI;
-                    $rezults[$user->id] = array('nume' => $user->name, 'scoala' => $user->school->name, 'indrumator' => $user->prof->name, 'scorI' => $scoreI, 'scorII' => $score, 'total'=>$total);
+                    $total = $score + $scoreI;
+                    $rezults[$user->id] = array('nume' => $user->name, 'scoala' => $user->school->name, 'indrumator' => $user->prof->name, 'scorI' => $scoreI, 'scorII' => $score, 'total' => $total);
                 }
             }
-            function sortByOrder($a, $b) {
+            function sortByOrder($a, $b)
+            {
                 return -($a['total'] - $b['total']);
             }
 
@@ -150,7 +151,7 @@ Route::group(['middleware' => 'admin'], function () {
 
         });
 
-        Route::resource('admin/teste', 'AdminTesteController',['names'=>[
+        Route::resource('admin/teste', 'AdminTesteController', ['names' => [
 
             'index' => 'admin.teste.index',
             'create' => 'admin.teste.create',
@@ -159,10 +160,8 @@ Route::group(['middleware' => 'admin'], function () {
             'show' => 'admin.teste.show',
 
 
-
-
         ]]);
-        Route::get('/downloadPDF/{id}','AdminTesteController@downloadPDF');
+        Route::get('/downloadPDF/{id}', 'AdminTesteController@downloadPDF');
         Route::get('admin/teste/creareintrebari/{id}', ['as' => 'admin.teste.creareintrebari', 'uses' => 'AdminTesteController@storeintrebari']);
         Route::get('admin/teste/updateintrebari/{id}', ['as' => 'admin.teste.updateintrebari', 'uses' => 'AdminTesteController@updateintrebari']);
         Route::get('admin/teste/editquestions/{id}', ['as' => 'admin.teste.editquestions', 'uses' => 'AdminTesteController@editquestions']);
@@ -175,7 +174,7 @@ Route::group(['middleware' => 'admin'], function () {
 
         Route::get('admin/indrumatori/rezultate/{id}', ['uses' => 'AdminIndrumatoriController@rezultate', 'as' => 'admin.intrumatori.rezultate']);
 
-        Route::resource('admin/indrumatori', 'AdminIndrumatoriController',['names'=>[
+        Route::resource('admin/indrumatori', 'AdminIndrumatoriController', ['names' => [
 
             'index' => 'admin.indrumatori.index',
             'create' => 'admin.indrumatori.create',
@@ -192,7 +191,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::group(['middleware' => 'admineditor'], function () {
 
         Route::get('admin/intrebari/detaliu', 'AdminIntrebariController@detaliu')->name('admin.intrebari.detaliu');
-        Route::resource('admin/intrebari', 'AdminIntrebariController',['names'=>[
+        Route::resource('admin/intrebari', 'AdminIntrebariController', ['names' => [
 
             'index' => 'admin.intrebari.index',
             'create' => 'admin.intrebari.create',
@@ -202,14 +201,14 @@ Route::group(['middleware' => 'admin'], function () {
 
         ]]);
 
-        Route::resource('admin/raspunsuri', 'AdminRaspunsuriController' ,['names'=>[
+        Route::resource('admin/raspunsuri', 'AdminRaspunsuriController', ['names' => [
 
             'index' => 'admin.raspunsuri.index',
             'store' => 'admin.raspunsuri.store',
             'edit' => 'admin.raspunsuri.edit',
 
 
-        ]],['except' => ['create']]);
+        ]], ['except' => ['create']]);
         Route::get('admin/raspunsuri/creare/{id}/{nr_raspunsuri}', ['as' => 'admin.raspunsuri.creare', 'uses' => 'AdminRaspunsuriController@create']);
 
         Route::get('/ajax-detaliu', function () {
@@ -323,14 +322,12 @@ Route::group(['middleware' => 'admin'], function () {
 
         $quiz = Quiz::findOrFail($id);
 
-        if($quiz->active==0) {
-            $input['active']=1;
-        }
-        else{
-            $input['active']=0;
+        if ($quiz->active == 0) {
+            $input['active'] = 1;
+        } else {
+            $input['active'] = 0;
         }
         $quiz->update($input);
-
 
 
         return $input['active'];
@@ -441,15 +438,24 @@ Route::group(['middleware' => 'adminelev'], function () {
 
 
         $user = Auth::user();
-//        $studentanswer = StudentAnswer::where([
-//            ['quiz_id', '=', $quiz->id],
-//            ['user_id', '=', $user->id],
-//            ['question_id', '=', $question_id],
-//
-//        ])->get();
+        $studentanswer = StudentAnswer::where([
+            ['quiz_id', '=', $quiz->id],
+            ['user_id', '=', $user->id],
+            ['question_id', '=', $quest->id],
 
+        ])->get()->first();
+        if ($studentanswer) {
+            $string = str_replace(' ', '', $user->email); // Replaces all spaces with hyphens.
+            $string = str_replace('-', '', $string); // Replaces all spaces with hyphens.
+            $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+            $pathE = '/userprojects/' . $string . "/" . $studentanswer->answer;
+            $ans = $studentanswer->answer;
+        } else {
+            $pathE = "";
+            $ans = "";
+        }
 
-        return view('admin.elevtest.testproiect', compact('quest', 'quiz'));
+        return view('admin.elevtest.testproiect', compact('quest', 'quiz', 'pathE' ,'ans'));
 
     });
 
@@ -490,7 +496,7 @@ Route::group(['middleware' => 'adminelev'], function () {
     });
 
     Route::post('admin/elevtest/store/V', ['as' => 'admin.elevtest.storeV', 'uses' => 'AdminStudentAnswerController@storeV']);
-    Route::resource('admin/elevtest', 'AdminStudentAnswerController',['names'=>[
+    Route::resource('admin/elevtest', 'AdminStudentAnswerController', ['names' => [
 
         'index' => 'admin.elevtest.index',
         'create' => 'admin.elevtest.create',
