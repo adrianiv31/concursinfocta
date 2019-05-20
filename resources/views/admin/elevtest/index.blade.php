@@ -38,7 +38,7 @@
                         @endif
                     </td>
 
-                    </td>
+
                 </tr>
             @endforeach
         @endif

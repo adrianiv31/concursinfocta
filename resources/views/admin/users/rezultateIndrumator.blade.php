@@ -12,8 +12,8 @@
             <th scope="col">Nume</th>
             <th scope="col">Scoala</th>
             <th scope="col">Indrumator</th>
-            <th scope="col">Rezultat Proba I</th>
-            <th scope="col">Rezultat Proba II</th>
+            {{--<th scope="col">Rezultat Proba I</th>--}}
+            <th scope="col">Rezultat</th>
             <th scope="col">Total</th>
 
         </tr>
@@ -26,7 +26,7 @@
                     <th scope="row">{{$rezult['nume']}}</th>
                     <th scope="row">{{$rezult['scoala']}}</th>
                     <th scope="row">{{$rezult['indrumator']}}</th>
-                    <th scope="row">{{$rezult['scorI']}}</th>
+                    {{--<th scope="row">{{$rezult['scorI']}}</th>--}}
                     <th scope="row">{{$rezult['scorII']}}</th>
                     <th scope="row">{{$rezult['total']}}</th>
 

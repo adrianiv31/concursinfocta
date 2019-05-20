@@ -114,7 +114,7 @@ Route::group(['middleware' => 'admin'], function () {
                         ]
                     )->get();
 
-
+                    $scoreI = 0;
                     foreach ($teste as $test) {
 
                         $ras_date = App\StudentAnswer::where([
@@ -481,6 +481,36 @@ Route::group(['middleware' => 'adminelev'], function () {
 //
 //        ])->get();
 
+
+////introdus nou
+//        $quest = null;
+//        $i=1;
+//        foreach ($questions as $question) {
+//
+//
+//            $quest = $question;
+//
+//
+//            $studentanswer = StudentAnswer::where([
+//                ['quiz_id', '=', $quiz->id],
+//                ['user_id', '=', $user->id],
+//                ['question_id', '=', $quest->id],
+//
+//            ])->get()->first();
+//            if ($studentanswer) {
+//                $string = str_replace(' ', '', $user->email); // Replaces all spaces with hyphens.
+//                $string = str_replace('-', '', $string); // Replaces all spaces with hyphens.
+//                $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+//                $pathE[$i] = '/userprojects/' . $string . "/" . $studentanswer->answer;
+//                $ans[$i] = $studentanswer->answer;
+//            } else {
+//                $pathE[$i] = "";
+//                $ans[$i] = "";
+//            }
+//            $i++;
+//        }
+//
+////pana aici
 
         return view('admin.elevtest.testproiectV', compact('questions', 'quiz'));
 

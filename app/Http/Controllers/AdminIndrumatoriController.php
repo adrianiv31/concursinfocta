@@ -202,7 +202,8 @@ class AdminIndrumatoriController extends Controller
             ])->get();
 
             $scor = 0;
-            if($test->tip==5) {
+
+           // if($test->tip==5) {
                 foreach ($ras_date as $ras_dat) {
 
 
@@ -210,22 +211,23 @@ class AdminIndrumatoriController extends Controller
                         $scor += $ras_dat->points;
 
                 }
-            }
-            else {
-                foreach ($ras_date as $ras_dat) {
-
-
-                    $ans = Answer::findOrFail($ras_dat->answer_id);
-
-                    if ($ans->corect)
-                        $scor += 5;
-
-                }
-            }
+          //  }
+//            else {
+//                foreach ($ras_date as $ras_dat) {
+//
+//
+//                    $ans = Answer::findOrFail($ras_dat->answer_id);
+//
+//                    if ($ans->corect)
+//                        $scor += 5;
+//
+//                }
+           // }
 
             $test['scor']=$scor;
 
         }
+
 
         return view('admin.indrumatori.rezultate',compact('elev','teste'));
 

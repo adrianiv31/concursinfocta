@@ -279,7 +279,7 @@ class AdminUsersController extends Controller
                     ]
                 )->get();
 
-
+                $scoreI = 0;
                 foreach ($teste as $test) {
 
                     $ras_date = StudentAnswer::where([
