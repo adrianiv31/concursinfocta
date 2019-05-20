@@ -61,14 +61,14 @@
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="215">
-              <caret line="549" column="34" lean-forward="true" selection-start-line="549" selection-start-column="34" selection-end-line="549" selection-end-column="34" />
+              <caret line="549" column="0" lean-forward="false" selection-start-line="549" selection-start-column="0" selection-end-line="549" selection-end-column="0" />
               <folding>
                 <element signature="e#388#402#0#PHP" expanded="true" />
-                <marker date="1558333904286" expanded="true" signature="7159:7211" ph="..." />
-                <marker date="1558333904286" expanded="true" signature="7159:7236" ph="..." />
-                <marker date="1558333904286" expanded="true" signature="7576:7620" ph="..." />
-                <marker date="1558333904286" expanded="true" signature="7764:7791" ph="..." />
-                <marker date="1558333904286" expanded="true" signature="7866:7879" ph="..." />
+                <marker date="1558335149249" expanded="true" signature="7159:7211" ph="..." />
+                <marker date="1558335149249" expanded="true" signature="7159:7236" ph="..." />
+                <marker date="1558335149249" expanded="true" signature="7576:7620" ph="..." />
+                <marker date="1558335149249" expanded="true" signature="7764:7791" ph="..." />
+                <marker date="1558335149249" expanded="true" signature="7866:7879" ph="..." />
               </folding>
             </state>
           </provider>
@@ -234,9 +234,9 @@
         <option value="$PROJECT_DIR$/resources/views/admin/elevtest/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/elevtest/testproiectV.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminIndrumatoriController.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminUsersController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/users/rezultateIndrumator.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
       </list>
     </option>
   </component>
@@ -635,6 +635,24 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="userprojects" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="concursinfocta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="concursinfocta" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -890,16 +908,15 @@
       <workItem from="1557134203579" duration="6895000" />
       <workItem from="1557724622331" duration="10295000" />
       <workItem from="1557860339074" duration="12040000" />
-      <workItem from="1558108479244" duration="6761000" />
+      <workItem from="1558108479244" duration="6886000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="306945000" />
+    <option name="totallyTimeSpent" value="307070000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1600" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.235" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -908,7 +925,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25439626" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25439626" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1312,14 +1329,14 @@
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
-          <caret line="549" column="34" lean-forward="true" selection-start-line="549" selection-start-column="34" selection-end-line="549" selection-end-column="34" />
+          <caret line="549" column="0" lean-forward="false" selection-start-line="549" selection-start-column="0" selection-end-line="549" selection-end-column="0" />
           <folding>
             <element signature="e#388#402#0#PHP" expanded="true" />
-            <marker date="1558333904286" expanded="true" signature="7159:7211" ph="..." />
-            <marker date="1558333904286" expanded="true" signature="7159:7236" ph="..." />
-            <marker date="1558333904286" expanded="true" signature="7576:7620" ph="..." />
-            <marker date="1558333904286" expanded="true" signature="7764:7791" ph="..." />
-            <marker date="1558333904286" expanded="true" signature="7866:7879" ph="..." />
+            <marker date="1558335149249" expanded="true" signature="7159:7211" ph="..." />
+            <marker date="1558335149249" expanded="true" signature="7159:7236" ph="..." />
+            <marker date="1558335149249" expanded="true" signature="7576:7620" ph="..." />
+            <marker date="1558335149249" expanded="true" signature="7764:7791" ph="..." />
+            <marker date="1558335149249" expanded="true" signature="7866:7879" ph="..." />
           </folding>
         </state>
       </provider>

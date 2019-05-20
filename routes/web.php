@@ -545,8 +545,7 @@ Route::group(['middleware' => 'adminevaluator'], function () {
 
 
         $user = Auth::user();
-        dd($user);
-        exit;
+
 
         if ($user->grade_id == 1 || $user->grade_id == 2) {
             $users = User::where([
