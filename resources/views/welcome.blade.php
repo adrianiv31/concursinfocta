@@ -8,7 +8,17 @@
                     <div class="panel-heading">Bine ați venit</div>
 
                     <div class="panel-body">
-                        @if (Auth::guest())
+                        <h3 style="color: #ff0000;">Rezultate</h3>
+                        <h4 style="color: #d58512"><a href="./rezultate/V.pdf" target="_blank">Clasa a V-a</a> </h4>
+                        <h4 style="color: #d58512"><a href="./rezultate/VI.pdf" target="_blank">Clasa a VI-a</a> </h4>
+                        <h4 style="color: #d58512"><a href="./rezultate/IX.pdf" target="_blank">Clasa a IX-a</a> </h4>
+                        <h4 style="color: #d58512"><a href="./rezultate/X.pdf" target="_blank">Clasa a X-a</a> </h4>
+                        <h4 style="color: #d58512"><a href="./rezultate/XI.pdf" target="_blank">Clasa a XI-a</a> </h4>
+                        <h4 style="color: #d58512"><a href="./rezultate/XII.pdf" target="_blank">Clasa a XII-a</a> </h4>
+                        <br>                        <br>
+                        <br>
+
+                    @if (Auth::guest())
                             <span style="text-align: center;">
 
                                 <h4>Regulament privind organizarea şi desfăşurarea</h4>

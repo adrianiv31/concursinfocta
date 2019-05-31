@@ -558,6 +558,7 @@ Route::group(['middleware' => 'adminevaluator'], function () {
                 ['grade_id', '<>', 2],
             ])->get();
         }
+
         $grade = Grade::findorfail($user->grade_id);
 
 
